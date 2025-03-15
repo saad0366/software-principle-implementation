@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="withoutpolymorphism">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/withoutpolymorphism.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
