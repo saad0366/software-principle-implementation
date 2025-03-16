@@ -1,56 +1,83 @@
-package WithoutPolymorphism;
-
 import java.util.Scanner;
 
-class Employee {
-    String name, type;
-    double salary, hourlyRate, perProjectRate;
+class FullTime {
+    String name;
+    double fixedSalary;
 
-    public Employee(String name, String type) {
+    FullTime(String name, double fixedSalary) {
         this.name = name;
-        this.type = type;
+        this.fixedSalary = fixedSalary;
     }
 
-    public void calculateSalary() {
-        Scanner scanner = new Scanner(System.in);
-
-        if (type.equalsIgnoreCase("full-time")) {
-            System.out.print("Enter fixed salary: ");
-            salary = scanner.nextDouble();
-            System.out.println(name + "'s Total Salary: $" + salary);
-        } 
-        else if (type.equalsIgnoreCase("part-time")) {
-            System.out.print("Enter per hour salary: ");
-            hourlyRate = scanner.nextDouble();
-            System.out.print("Enter hours worked: ");
-            int hours = scanner.nextInt();
-            salary = hourlyRate * hours;
-            System.out.println(name + "'s Total Salary: $" + salary);
-        } 
-        else if (type.equalsIgnoreCase("freelancer")) {
-            System.out.print("Enter per project salary: ");
-            perProjectRate = scanner.nextDouble();
-            System.out.print("Enter number of projects completed: ");
-            int projects = scanner.nextInt();
-            salary = perProjectRate * projects;
-            System.out.println(name + "'s Total Salary: $" + salary);
-        } 
-        else {
-            System.out.println("Invalid Employee Type!");
-        }
+    void calculateSalary() {
+        System.out.println(name + "'s Salary: $" + fixedSalary);
     }
 }
 
-public class Withoutpolymorphism {
+class PartTime {
+    String name;
+    double hourlyRate;
+    int hoursWorked;
+
+    PartTime(String name, double hourlyRate, int hoursWorked) {
+        this.name = name;
+        this.hourlyRate = hourlyRate;
+        this.hoursWorked = hoursWorked;
+    }
+
+    void calculateSalary() {
+        System.out.println(name + "'s Salary: $" + (hourlyRate * hoursWorked));
+    }
+}
+
+class Freelancer {
+    String name;
+    double projectRate;
+    int projectsCompleted;
+
+    Freelancer(String name, double projectRate, int projectsCompleted) {
+        this.name = name;
+        this.projectRate = projectRate;
+        this.projectsCompleted = projectsCompleted;
+    }
+
+    void calculateSalary() {
+        System.out.println(name + "'s Salary: $" + (projectRate * projectsCompleted));
+    }
+}
+
+public class WithoutPolymorphism {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         System.out.print("Enter Employee Name: ");
         String name = scanner.nextLine();
         System.out.print("Enter Employee Type (Full-Time/Part-Time/Freelancer): ");
         String type = scanner.nextLine();
 
-        Employee emp = new Employee(name, type);
-        emp.calculateSalary();
+        if (type.equalsIgnoreCase("Full-Time")) {
+            System.out.print("Enter fixed salary: ");
+            double fixedSalary = scanner.nextDouble();
+            FullTime emp = new FullTime(name, fixedSalary);
+            emp.calculateSalary();
+        } else if (type.equalsIgnoreCase("Part-Time")) {
+            System.out.print("Enter hourly rate: ");
+            double hourlyRate = scanner.nextDouble();
+            System.out.print("Enter hours worked: ");
+            int hoursWorked = scanner.nextInt();
+            PartTime emp = new PartTime(name, hourlyRate, hoursWorked);
+            emp.calculateSalary();
+        } else if (type.equalsIgnoreCase("Freelancer")) {
+            System.out.print("Enter project rate: ");
+            double projectRate = scanner.nextDouble();
+            System.out.print("Enter projects completed: ");
+            int projectsCompleted = scanner.nextInt();
+            Freelancer emp = new Freelancer(name, projectRate, projectsCompleted);
+            emp.calculateSalary();
+        } else {
+            System.out.println("Invalid Employee Type!");
+        }
     }
 }
+
 
